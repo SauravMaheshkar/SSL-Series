@@ -13,6 +13,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		build-essential \
 		gcc \
+		cmake \
 		gfortran \
 		libopenblas-dev \
 		python3.10 \
@@ -24,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN python3.10 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN python3.10 -m pip install --upgrade pip setuptools wheel isort
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel isort
 RUN CFLAGS="-g0 -Os -DNDEBUG -Wl,--strip-all -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" \
 		pip3 install --no-cache-dir \
  		--compile \
