@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN python3.10 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel isort
+RUN python3.10 -m pip install --no-cache-dir --upgrade pip setuptools wheel isort
 RUN CFLAGS="-g0 -Os -DNDEBUG -Wl,--strip-all -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib" \
 		pip3 install --no-cache-dir \
  		--compile \
